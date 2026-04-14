@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String    
+  phone         String?
+  businessName  String?
+  role          Role      @default(CUSTOMER)
+  isApproved    Boolean   @default(false)
+  orders        Order[]
+  createdAt     DateTime  @default(now())
+}
+
+enum Role { 
+  CUSTOMER 
+  ADMIN 
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  image     String?
+  products  Product[]
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  name        String
+  sku         String    @unique
+  description String
+  price       Float     
+  moq         Int       @default(12) 
+  stock       Int       @default(0)
+  images      String[]  
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id])
+  isActive    Boolean   @default(true)
+  isFeatured  Boolean   @default(false)
+  badge       String?   
+  orderItems  OrderItem[]
+  createdAt   DateTime  @default(now())
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderNumber  String      @unique 
+  userId       String?
+  user         User?       @relation(fields: [userId], references: [id])
+  guestName    String?
+  guestEmail   String?
+  guestPhone   String?
+  businessName String?
+  items        OrderItem[]
+  totalAmount  Float
+  status       OrderStatus @default(PENDING)
+  paymentMode  String?
+  notes        String?
+  shippingAddress String?
+  createdAt    DateTime    @default(now())
+}
+
+enum OrderStatus {
+  PENDING 
+  CONFIRMED 
+  PROCESSING 
+  SHIPPED 
+  DELIVERED 
+  CANCELLED
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     
+  price     Float
+}
+
+model SiteSettings {
+  id          String @id @default(cuid())
+  whatsapp    String
+  phone       String
+  email       String
+  address     String
+  instagram   String?
+  facebook    String?
+  aboutText   String?
+}
