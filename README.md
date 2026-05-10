@@ -59,8 +59,7 @@ Visit `http://localhost:3000`
 
 ### 5. Admin Login
 
-- **Email:** admin@glamwholesale.com
-- **Password:** Admin@1234
+See `.env.example` for setup. Default seed credentials are in `prisma/seed.ts`.
 
 ## 🎨 Color Theme
 
