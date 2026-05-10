@@ -1,5 +1,7 @@
 # Glam Wholesale — Full Stack E-Commerce Platform
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen)](https://glam-wholesale-ecommerce-store.vercel.app)
+
 India's Premier Wholesale Accessories E-Commerce Website built with Next.js 14.
 
 ## 🚀 Tech Stack
