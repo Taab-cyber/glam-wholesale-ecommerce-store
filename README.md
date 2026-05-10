@@ -57,9 +57,12 @@ npm run dev
 
 Visit `http://localhost:3000`
 
-### 5. Admin Login
+### 5. Admin Login (Demo)
 
-See `.env.example` for setup. Default seed credentials are in `prisma/seed.ts`.
+- **Email:** admin@glamwholesale.com
+- **Password:** Admin@1234
+
+> These are seed/demo credentials for reviewing the admin dashboard.
 
 ## 🎨 Color Theme
 
